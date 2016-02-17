@@ -1,0 +1,13 @@
+---
+- hosts: all
+  user: pi
+  become: yes
+  tasks:
+    - name: install samba
+      package: name=samba state=latest
+
+    - name: mount the external drive, plop
+      mount: name=/mnt/plop fstype=ext4 state=mounted src='UUID=8ffed44c-5198-4d49-ab07-3db72c4d8d29'
+
+    - name: mount the other external drive, blorp
+      mount: name=/mnt/blorp fstype=ext4 state=mounted src='UUID=4f77ad0f-b0a7-454a-9de8-0c34671f77e0'
