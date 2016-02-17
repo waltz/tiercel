@@ -4,7 +4,7 @@
   become: yes
   tasks:
     - name: set the host name
-      hostname: name={{ hostname }}
+      hostname: name="{{ lookup('ini', 'hostname section=seedbox file=config.ini') }}"
 
     - name: mount the external drive, plop
       mount: name=/mnt/plop fstype=ext4 state=mounted src='UUID=8ffed44c-5198-4d49-ab07-3db72c4d8d29'
@@ -39,7 +39,7 @@
       package: name=transmission-daemon state=latest
 
     - name: configure transmission
-      template: src=templates/transmission-settings.json dest=/etc/transmission-daemon/settings.json
+      template: src=templates/transmission-settings.json.j2 dest=/etc/transmission-daemon/settings.json
       register: transmissionconfig
 
     - name: reload transmission
