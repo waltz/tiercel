@@ -3,6 +3,9 @@
   user: pi
   become: yes
   tasks:
+    - name: set the host name
+      hostname: name={{ hostname }}
+
     - name: install samba
       apt: pkg={{ item }} state=latest install_recommends=no
       with_items: [ 'samba', 'samba-common', 'samba-common-bin' ]
