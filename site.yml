@@ -4,7 +4,27 @@
   become: yes
   tasks:
     - name: install samba
-      package: name=samba state=latest
+      apt: pkg={{ item }} state=latest install_recommends=no
+      with_items: [ 'samba', 'samba-common', 'samba-common-bin' ]
+
+    - name: configure samba
+      template: src=templates/smb.conf dest=/etc/samba/smb.conf
+      register: sambaconfig
+
+    - name: restart samba
+      service: name=smbd state=restarted
+      when: sambaconfig.changed
+
+    - name: install avahi
+      package: name=libnss-mdns state=latest
+
+    - name: tell avahi to advertise samba
+      template: src=templates/smb.service dest=/etc/avahi/services/smb.service
+      register: avahiconfig
+
+    - name: restart avahi
+      service: name=avahi-daemon state=restarted
+      when: avahiconfig
 
     - name: mount the external drive, plop
       mount: name=/mnt/plop fstype=ext4 state=mounted src='UUID=8ffed44c-5198-4d49-ab07-3db72c4d8d29'

@@ -9,4 +9,4 @@ To use this playbook, copy the `hosts.example` file to `hosts` in this project's
 directory. Then add in the hostname of your Raspberry Pi. Once you've done that
 you can run these playbooks like so:
 
-    `ansible-playbook -i hosts site.yml`
+    ansible-playbook -i hosts site.yml
