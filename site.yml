@@ -38,10 +38,11 @@
     - name: install transmission
       package: name=transmission-daemon state=latest
 
+    - name: stop transmission
+      service: name=transmission-daemon state=stopped
+
     - name: configure transmission
       template: src=templates/transmission-settings.json.j2 dest=/etc/transmission-daemon/settings.json
-      register: transmissionconfig
 
-    - name: reload transmission
-      service: name=transmission-daemon state=reloaded
-      when: transmissionconfig.changed
+    - name: start transmission
+      service: name=transmission-daemon state=started
