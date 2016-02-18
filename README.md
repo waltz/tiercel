@@ -1,4 +1,4 @@
-# Seedbox
+# Tiercel
 
 I have a little Raspberry Pi that I use to seed torrents. This repo has my
 Ansible playbook that describes the configuration on that machine.
