@@ -1,2 +1,2 @@
 hosts
-config.ini
+vars/defaults.yml
