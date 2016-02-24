@@ -2,8 +2,12 @@
 - hosts: all
   user: pi
   become: yes
+  roles:
+    - rootbackup
+
   vars_files:
     - vars/defaults.yml
+
   tasks:
     - name: set the host name
       hostname: name={{ hostname }}

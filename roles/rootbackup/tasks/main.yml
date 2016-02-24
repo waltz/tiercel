@@ -1,0 +1,6 @@
+---
+- name: copy over the backup script
+  copy: src=files/rootbackup.sh dest=/root/rootbackup.sh mode=0755
+
+- name: call the backup script every day
+  cron: name="backup the root fs" minute="0" hour="0" state=present job="/root/rootbackup.sh"
