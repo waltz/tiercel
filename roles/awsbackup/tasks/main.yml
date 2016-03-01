@@ -1,0 +1,12 @@
+---
+- name: install the duplicity backup tool
+  package: name={{ item }} state=latest
+  with_items:
+    - duplicity
+    - python-boto
+
+- name: copy over the script that performs the backup
+  template: src=awsbackup.sh.j2 dest=/root/awsbackup.sh mode=0755
+
+- name: run the backup task regularly
+  cron: name="backup the external volume" hour="2" minute="33" state=present job="/root/awsbackup.sh"

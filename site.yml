@@ -4,6 +4,7 @@
   become: yes
   roles:
     - rootbackup
+    - awsbackup
 
   vars_files:
     - vars/defaults.yml
@@ -19,8 +20,11 @@
       mount: name=/mnt/blorp fstype=ext4 state=mounted src='UUID=4f77ad0f-b0a7-454a-9de8-0c34671f77e0'
 
     - name: install samba
-      apt: pkg={{ item }} state=latest install_recommends=no
-      with_items: [ 'samba', 'samba-common', 'samba-common-bin' ]
+      package: name={{ item }} state=latest
+      with_items:
+        - samba
+        - samba-common
+        - samba-common-bin
 
     - name: configure samba
       template: src=templates/smb.conf dest=/etc/samba/smb.conf
