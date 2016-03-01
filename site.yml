@@ -5,6 +5,7 @@
   roles:
     - rootbackup
     - awsbackup
+    - syncdrives
 
   vars_files:
     - vars/defaults.yml

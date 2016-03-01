@@ -1,0 +1,6 @@
+---
+- name: copy over the sync script
+  copy: src=files/syncdrives.sh dest=/root/syncdrives.sh mode=0755
+
+- name: run the drive mirror regularly
+  cron: name="mirror the external drives" hour="3" minute="11" state=present job="/root/syncdrives.sh"
