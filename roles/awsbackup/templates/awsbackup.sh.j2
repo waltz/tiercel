@@ -5,15 +5,17 @@ set +xe
 export AWS_ACCESS_KEY_ID={{ aws_access_key_id }}
 export AWS_SECRET_ACCESS_KEY={{ aws_secret_access_key }}
 
+LOGFILE=/var/log/awsbackup.log
+
 duplicity \
-  --dry-run \
   --no-encryption \
   --verbosity info \
   --exclude /mnt/plop/Backups/anna \
   --exclude /mnt/plop/Torrents \
   --exclude /mnt/plop/Movies \
   /mnt/plop \
-  s3://s3.amazonaws.com/{{ s3_bucket }}
+  s3://s3.amazonaws.com/{{ s3_bucket }} \
+  | tee --append $LOGFILE
 
 unset AWS_ACCESS_KEY_ID
 unset AWS_SECRET_ACCESS_KEY
