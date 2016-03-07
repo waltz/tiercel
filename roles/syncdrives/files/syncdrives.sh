@@ -2,4 +2,6 @@
 
 set +xe
 
-rsync -avz /mnt/plop/ /mnt/blorp
+LOGFILE=/var/log/syncdrives.log
+
+rsync -avz /mnt/plop/ /mnt/blorp | tee --append $LOGFILE
