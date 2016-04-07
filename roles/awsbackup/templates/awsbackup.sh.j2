@@ -8,6 +8,7 @@ export AWS_SECRET_ACCESS_KEY={{ aws_secret_access_key }}
 LOGFILE=/var/log/awsbackup.log
 
 duplicity \
+  --extra-clean \
   --no-encryption \
   --verbosity info \
   --exclude /mnt/plop/Backups/anna \
