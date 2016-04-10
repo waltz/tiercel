@@ -7,6 +7,7 @@
     - awsbackup
     - syncdrives
     - diskalert
+    - postfix
 
   vars_files:
     - vars/defaults.yml
