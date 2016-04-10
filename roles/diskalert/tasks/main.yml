@@ -1,0 +1,6 @@
+---
+- name: copy over the disk checking script
+  copy: src=files/diskalert.sh dest=/root/diskalert.sh mode=0755
+
+- name: run the check script regularly
+  cron: name="check how full the main volume is and alert" minute="45" state=present job="/root/diskalert.sh"

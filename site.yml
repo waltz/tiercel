@@ -6,6 +6,7 @@
     - rootbackup
     - awsbackup
     - syncdrives
+    - diskalert
 
   vars_files:
     - vars/defaults.yml
