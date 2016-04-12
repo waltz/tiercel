@@ -1,0 +1,10 @@
+myhostname = waxwing.deepyogurt.org
+myorigin = $mydomain
+relayhost = {{ email_server }}:587
+inet_interfaces = loopback-only
+mydestination =
+inet_protocols = ipv4
+smtp_use_tls = yes
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous

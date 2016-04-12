@@ -1,3 +1,34 @@
 ---
 - name: install the postfix package
-  package: name="postfix" state=latest
+  package: name={{ item }} state=latest
+  with_items:
+    - postfix
+    - mailutils
+    - libsasl2-2
+    - libsasl2-modules
+    - ca-certificates
+
+- name: Write Postfix configuration template
+  template: >
+    src=main.cf.j2
+    dest=/etc/postfix/main.cf
+    mode=0644 owner=root group=root
+    backup=yes
+
+- name: set the external smtp relay to use
+  template: src=sasl_passwd.j2 dest=/etc/postfix/sasl_passwd
+
+- name: ingest the stmp relay configure
+  command: postmap /etc/postfix/sasl_passwd
+
+- name: secure the password files
+  file: path={{ item }} owner=root group=root mode=0600
+  with_items:
+    - /etc/postfix/sasl_passwd
+    - /etc/postfix/sasl_passwd.db
+
+- name: configure email aliases and defaults
+  template: src=aliases.j2 dest=/etc/aliases
+
+- name: (re)start postfix
+  service: name=postfix state=restarted enabled=yes

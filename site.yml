@@ -59,3 +59,9 @@
 
     - name: start transmission
       service: name=transmission-daemon state=started
+
+    - name: install node
+      package: name={{ item }} state=latest
+      with_items:
+        - node
+        - npm
