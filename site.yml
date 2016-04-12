@@ -9,6 +9,7 @@
     - diskalert
     - postfix
     - samba
+    - transmission
 
   vars_files:
     - vars/defaults.yml
@@ -22,18 +23,6 @@
 
     - name: mount the other external drive, blorp
       mount: name=/mnt/blorp fstype=ext4 state=mounted src='UUID=4f77ad0f-b0a7-454a-9de8-0c34671f77e0'
-
-    - name: install transmission
-      package: name=transmission-daemon state=latest
-
-    - name: stop transmission
-      service: name=transmission-daemon state=stopped
-
-    - name: configure transmission
-      template: src=templates/transmission-settings.json.j2 dest=/etc/transmission-daemon/settings.json
-
-    - name: start transmission
-      service: name=transmission-daemon state=started
 
     - name: install node
       package: name={{ item }} state=latest

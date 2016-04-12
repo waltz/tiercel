@@ -1,0 +1,12 @@
+---
+- name: install transmission
+  package: name=transmission-daemon state=latest
+
+- name: stop transmission
+  service: name=transmission-daemon state=stopped
+
+- name: configure transmission
+  template: src=transmission-settings.json.j2 dest=/etc/transmission-daemon/settings.json
+
+- name: start transmission
+  service: name=transmission-daemon state=started
