@@ -1,0 +1,26 @@
+---
+- name: install samba
+  package: name={{ item }} state=latest
+  with_items:
+    - samba
+    - samba-common
+    - samba-common-bin
+
+- name: configure samba
+  template: src=smb.conf dest=/etc/samba/smb.conf
+  register: sambaconfig
+
+- name: restart samba
+  service: name=smbd state=restarted
+  when: sambaconfig.changed
+
+- name: install avahi
+  package: name=libnss-mdns state=latest
+
+- name: tell avahi to advertise samba
+  template: src=smb.service dest=/etc/avahi/services/smb.service
+  register: avahiconfig
+
+- name: restart avahi
+  service: name=avahi-daemon state=restarted
+  when: avahiconfig.changed
