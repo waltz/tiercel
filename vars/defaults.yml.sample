@@ -8,3 +8,6 @@ notification_email: hi@gmail.com
 email_server: smtp.gmail.com
 email_username: hi@gmail.com
 email_password: pwordisgreat
+external_drives:
+  test:
+    uuid: fff-fff-fff
