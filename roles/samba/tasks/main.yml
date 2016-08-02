@@ -5,6 +5,7 @@
     - samba
     - samba-common
     - samba-common-bin
+    - libpam-smbpass
 
 - name: configure samba
   template: src=smb.conf dest=/etc/samba/smb.conf

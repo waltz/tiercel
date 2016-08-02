@@ -3,6 +3,7 @@
   user: pi
   become: yes
   roles:
+    - apt
     - rootbackup
     - awsbackup
     - syncdrives
@@ -10,6 +11,7 @@
     - postfix
     - samba
     - transmission
+    - users
 
   vars_files:
     - vars/defaults.yml

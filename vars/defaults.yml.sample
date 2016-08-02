@@ -1,4 +1,6 @@
 hostname: waxwing
+username: joe
+password: joecool123
 transmissionuser: admin
 transmissionpass: ohyeah
 aws_access_key_id: fakey
