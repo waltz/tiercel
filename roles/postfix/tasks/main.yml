@@ -8,7 +8,7 @@
     - libsasl2-modules
     - ca-certificates
 
-- name: Write Postfix configuration template
+- name: write Postfix configuration template
   template: >
     src=main.cf.j2
     dest=/etc/postfix/main.cf
@@ -17,9 +17,11 @@
 
 - name: set the external smtp relay to use
   template: src=sasl_passwd.j2 dest=/etc/postfix/sasl_passwd
+  register: postfixpassword
 
 - name: ingest the stmp relay configure
   command: postmap /etc/postfix/sasl_passwd
+  when: postfixpassword.changed
 
 - name: secure the password files
   file: path={{ item }} owner=root group=root mode=0600
