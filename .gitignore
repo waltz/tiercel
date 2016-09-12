@@ -1,2 +1,3 @@
 hosts
 vars/defaults.yml
+.tags*
