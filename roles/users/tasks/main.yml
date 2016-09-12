@@ -1,1 +1,5 @@
-- user: name={{ username }} password={{ password }}
+- name: a group for sharing files
+  group: name=filesharing state=present
+
+- name: create the a not-so-default user
+  user: name={{ username }} password={{ password }} groups=filesharing
