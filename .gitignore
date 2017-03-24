@@ -1,3 +1,4 @@
 hosts
 vars/defaults.yml
 .tags*
+*.retry
