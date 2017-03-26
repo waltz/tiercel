@@ -1,0 +1,12 @@
+- name: install minidlna
+  package:
+    name: minidlna
+    state: present
+
+- name: configure the media server
+  template: src=minidlna.conf.j2 dest=/etc/minidlna.conf mode=0755
+  register: minidlnaconfig
+
+- name: restart minidlna
+  service: name=minidlna state=restarted
+  when: minidlnaconfig.changed

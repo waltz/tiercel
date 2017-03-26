@@ -1,3 +1,8 @@
 ---
 - name: update packages
   apt: update_cache=yes
+
+- name: add support for https repos
+  package:
+    name: apt-transport-https
+    state: latest
